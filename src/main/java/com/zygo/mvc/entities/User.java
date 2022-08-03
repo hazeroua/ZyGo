@@ -25,14 +25,62 @@ public class User implements Serializable {
 	@JoinTable(name="USERS_ROLES")
 	private Collection<Role> roles;
 	@OneToMany
-	@JoinTable(name="USERS_EXERCICES")
+	@JoinTable(name="USERS_EXERCICES_PECTORALS")
 	private List<Exercice> exercices= new ArrayList<>();
-
+	@OneToMany
+	@JoinTable(name="USERS_EXERCICES_LATS")
+	private List<LatsExercice> exercicesL= new ArrayList<>();
+	@OneToMany
+	@JoinTable(name="USERS_EXERCICES_LEGS")
+	private List<LegsExercice> exercicesLe= new ArrayList<>();
+	@OneToMany
+	@JoinTable(name="USERS_EXERCICES_ARMS")
+	private List<ArmsExercice> exercicesA= new ArrayList<>();
+	@OneToMany
+	@JoinTable(name="USERS_EXERCICES_SHOULDERS")
+	private List<ShouldersExercice> exercicesS= new ArrayList<>();
+	
+	public List<LegsExercice> getExercicesLe() {
+		return exercicesLe;
+	}
+	public void setExercicesLe(List<LegsExercice> exercicesLe) {
+		this.exercicesLe = exercicesLe;
+	}
+	public List<ArmsExercice> getExercicesA() {
+		return exercicesA;
+	}
+	public void setExercicesA(List<ArmsExercice> exercicesA) {
+		this.exercicesA = exercicesA;
+	}
+	public List<ShouldersExercice> getExercicesS() {
+		return exercicesS;
+	}
+	public void setExercicesS(List<ShouldersExercice> exercicesS) {
+		this.exercicesS = exercicesS;
+	}
+	public List<LatsExercice> getExercicesL() {
+		return exercicesL;
+	}
+	public void setExercicesL(List<LatsExercice> exercicesL) {
+		this.exercicesL = exercicesL;
+	}
 	public String getPassword() {
 		return password;
 	}
 	public void SetExerciceForaUser(Exercice e) {
 		exercices.add(e);
+	}
+	public void SetExerciceLForaUser(LatsExercice e) {
+		exercicesL.add(e);
+	}
+	public void SetExerciceSForaUser(ShouldersExercice e) {
+		exercicesS.add(e);
+	}
+	public void SetExerciceLeForaUser(LegsExercice e) {
+		exercicesLe.add(e);
+	}
+	public void SetExerciceAForaUser(ArmsExercice e) {
+		exercicesA.add(e);
 	}
 	public void setPassword(String password) {
 		this.password = password;
