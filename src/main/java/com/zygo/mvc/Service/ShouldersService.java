@@ -10,10 +10,13 @@ import com.zygo.mvc.Repository.LatsSerieRepository;
 import com.zygo.mvc.Repository.ShouldersExerciceRepository;
 import com.zygo.mvc.Repository.ShouldersSerieRepository;
 import com.zygo.mvc.Repository.UserRepository;
+import com.zygo.mvc.entities.Exercice;
 import com.zygo.mvc.entities.LatsExercice;
 import com.zygo.mvc.entities.LatsSerie;
+import com.zygo.mvc.entities.Serie;
 import com.zygo.mvc.entities.ShouldersExercice;
 import com.zygo.mvc.entities.ShouldersSerie;
+import com.zygo.mvc.entities.User;
 
 @Service
 public class ShouldersService {
@@ -55,7 +58,26 @@ public class ShouldersService {
 		 s.setExercieS(repository.findByIdES(id));
 		 Srepository.save(s);
 	}
-	public void deleteSerie(ShouldersSerie s) {
-		Srepository.delete(s);
+
+	public ShouldersSerie deleteSerie(Long id) {
+		ShouldersSerie s = Srepository.findByIdSS(id);
+		ShouldersExercice e = s.getExercieS();
+		 e.getSeriesS().remove(s);
+		 Srepository.delete(s);
+		 
+		 return s;
+	}
+	public ShouldersExercice deleteExercice(Long id) {
+		ShouldersExercice e = repository.findByIdES(id);
+		User u = e.getUser();
+		for(ShouldersSerie s : this.getAllSerieByEx(e)) {
+			Long idn=s.getIdSS();
+			this.deleteSerie(idn);
+		}
+		u.getExercicesS().remove(e);
+		repository.delete(e);
+		
+
+		return e;
 	}
 }

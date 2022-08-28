@@ -34,14 +34,20 @@
     </nav>
 <body>
  		<center>
-            <h1>User Registration - Sign Up</h1>
+            <h1>User Registration</h1>
+            <p></p>
+            <p></p>
+            <p></p>
+            
         </center>
          <form th:action="@{/register}" th:object="${user}"
             method="post" style="max-width: 600px; margin: 0 auto;">
         <div class="col-8">
+        <label>Username :</label>
             <input type="text" th:field="*{username}" class="form-control" required />
         </div>
 		<div class="col-8">
+		<label>Password :</label>
              <input type="password" th:field="*{password}" class="form-control"
                             required minlength="6" maxlength="10"/>
         </div>
@@ -49,8 +55,25 @@
               <button type="submit" class="btn btn-primary">Sign Up</button>
         </div>
         </form>
-        <p>si vous subissez des erreur revenez en arriere et relancer le site</p>
-    <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+        <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            
+        <center><p>si vous subissez des erreur c'est que vous avez le meme username d'une autre personne donc revenez en arriere et relancer le site et changer de nom</p></center>
+   	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p>
+	<p></p> <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
         <div class="container-fluid tm-container-small">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">

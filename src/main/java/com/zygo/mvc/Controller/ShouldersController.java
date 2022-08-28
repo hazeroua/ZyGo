@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zygo.mvc.Repository.UserRepository;
 import com.zygo.mvc.Service.ShouldersService;
@@ -21,10 +22,10 @@ public class ShouldersController {
 	private UserRepository userRepo;
 	@Autowired
 	private ShouldersService service;
-	@GetMapping("/Programmeshoulders/{username}")
+	@GetMapping("/ProgrammeShoulders/{username}")
 	public String pectoralsindex(Model model,@PathVariable String username) {
 		model.addAttribute("exercice", this.service.getAllExoByUsername(username));
-		return "shouldersProgramme";
+		return "ShouldersProgramme";
 	}
 	@GetMapping("/addES/{username}")
 	public String add(Model model, Model model2, @PathVariable String username) {
@@ -36,9 +37,9 @@ public class ShouldersController {
 	public String store(@ModelAttribute ShouldersExercice e, Model model, @PathVariable String username) {
 		model.addAttribute("username", userRepo.findByUsername(username));
 		this.service.saveExercice(e, username);
-		return "redirect:/Programmeshoulders/{username}";
+		return "redirect:/ProgrammeShoulders/{username}";
 	}
-	@GetMapping("/Programmeshoulders/exercice/{id}")
+	@GetMapping("/ProgrammeShoulders/exercice/{id}")
 	public String series(Model model2,Model model,Model model3, @PathVariable Long id ) {
 		model.addAttribute("exercice", service.findByIdEL(id));
 		ShouldersExercice e = service.findByIdEL(id);
@@ -53,9 +54,19 @@ public class ShouldersController {
 		model3.addAttribute("surveyMap", surveyMap);
 		return "getSerieS";
 	}
-	@PostMapping("/Programmeshoulders/exercice/{id}")
+	@PostMapping("/ProgrammeShoulders/exercice/{id}")
 	public String storee(Model model, @PathVariable Long id, @ModelAttribute ShouldersSerie s) {
 		this.service.ShouldersAddSerieForAnExercice(s, id);
-		return "redirect:/Programmeshoulders/exercice/{id}";
+		return "redirect:/ProgrammeShoulders/exercice/{id}";
+	}
+	@GetMapping("/deleteS")
+	public String delete(@RequestParam Long id) {
+		this.service.deleteSerie(id);
+		return "redirect:/";
+	}
+	@GetMapping("/deleteExS")
+	public String deleteEx(@RequestParam Long id) {
+		this.service.deleteExercice(id);
+		return "redirect:/";
 	}
 }

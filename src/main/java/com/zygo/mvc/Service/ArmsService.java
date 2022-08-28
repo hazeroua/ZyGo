@@ -10,6 +10,8 @@ import com.zygo.mvc.Repository.ArmsSerieRepository;
 import com.zygo.mvc.Repository.UserRepository;
 import com.zygo.mvc.entities.ArmsExercice;
 import com.zygo.mvc.entities.ArmsSerie;
+import com.zygo.mvc.entities.ArmsExercice;
+import com.zygo.mvc.entities.User;
 
 @Service
 public class ArmsService {
@@ -51,7 +53,20 @@ public class ArmsService {
 		 s.setExercieA(repository.findByIdEA(id));
 		 Srepository.save(s);
 	}
-	public void deleteSerie(ArmsSerie s) {
-		Srepository.delete(s);
+	public ArmsSerie deleteSerie(Long id) {
+		ArmsSerie s = Srepository.findByIdSA(id);
+		ArmsExercice e = s.getExercieA();
+		 e.getSeriesA().remove(s);
+		 Srepository.delete(s);
+		 
+		 return s;
+	}
+	public ArmsExercice deleteExercice(Long id) {
+		ArmsExercice e = repository.findByIdEA(id);
+		User u = e.getUser();
+		u.getExercicesA().remove(e);
+		repository.delete(e);
+
+		return e;
 	}
 }

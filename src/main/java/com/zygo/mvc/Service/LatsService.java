@@ -10,6 +10,8 @@ import com.zygo.mvc.Repository.LatsSerieRepository;
 import com.zygo.mvc.Repository.UserRepository;
 import com.zygo.mvc.entities.LatsExercice;
 import com.zygo.mvc.entities.LatsSerie;
+import com.zygo.mvc.entities.LatsExercice;
+import com.zygo.mvc.entities.User;
 
 @Service
 public class LatsService {
@@ -51,8 +53,20 @@ public class LatsService {
 		 s.setExercie(repository.findByIdEL(id));
 		 Srepository.save(s);
 	}
-	public void deleteSerie(LatsSerie s) {
-		Srepository.delete(s);
+	public LatsSerie deleteSerie(Long id) {
+		LatsSerie s = Srepository.findByIdSL(id);
+		LatsExercice e = s.getExercie();
+		 e.getSeriesL().remove(s);
+		 Srepository.delete(s);
+		 
+		 return s;
 	}
-	
+	public LatsExercice deleteExercice(Long id) {
+		LatsExercice e = repository.findByIdEL(id);
+		User u = e.getUser();
+		u.getExercicesL().remove(e);
+		repository.delete(e);
+
+		return e;
+	}
 }

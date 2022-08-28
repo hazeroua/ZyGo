@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zygo.mvc.Repository.UserRepository;
 import com.zygo.mvc.Service.ArmsService;
@@ -58,5 +59,15 @@ public class ArmsController {
 	public String storee(Model model, @PathVariable Long id, @ModelAttribute ArmsSerie s) {
 		this.service.ArmsAddSerieForAnExercice(s, id);
 		return "redirect:/ProgrammeArms/exercice/{id}";
+	}
+	@GetMapping("/deleteA")
+	public String delete(@RequestParam Long id) {
+		this.service.deleteSerie(id);
+		return "redirect:/";
+	}
+	@GetMapping("/deleteExA")
+	public String deleteEx(@RequestParam Long id) {
+		this.service.deleteExercice(id);
+		return "redirect:/";
 	}
 }

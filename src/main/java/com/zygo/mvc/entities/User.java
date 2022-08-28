@@ -39,7 +39,12 @@ public class User implements Serializable {
 	@OneToMany
 	@JoinTable(name="USERS_EXERCICES_SHOULDERS")
 	private List<ShouldersExercice> exercicesS= new ArrayList<>();
-	
+	@OneToMany
+	@JoinTable(name="USERS_MUSIC")
+	private List<Music> Musics = new ArrayList<>();
+	@OneToMany
+	@JoinTable(name="USERS_PROGRAMME_PECTORALS")
+	private List<Programme> programmes= new ArrayList<Programme>();
 	public List<LegsExercice> getExercicesLe() {
 		return exercicesLe;
 	}
@@ -113,5 +118,20 @@ public class User implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	public void setProgrammeForaUser(Programme p) {
+		programmes.add(p);
+	}
+	public List<Music> getMusics() {
+		return Musics;
+	}
+	public void setMusics(List<Music> musics) {
+		Musics = musics;
+	}
+	public List<Programme> getProgrammes() {
+		return programmes;
+	}
+	public void setProgrammes(List<Programme> programmes) {
+		this.programmes = programmes;
+	}
+	
 }

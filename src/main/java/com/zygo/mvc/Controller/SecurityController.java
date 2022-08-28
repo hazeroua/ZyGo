@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zygo.mvc.Repository.UserRepository;
 import com.zygo.mvc.Service.PectoralsService;
@@ -76,11 +77,11 @@ public class SecurityController {
 		this.service.addSerieForAnExercice(s, id);
 		return "redirect:/ProgrammePectoral/exercice/{id}";
 	}
-	@PostMapping("/ProgrammePectoral/exercice/delete/{id}")
-	public String deleteSerie(@ModelAttribute Serie s) {
-		this.service.deleteSerie(s);
-		return "redirect:/ProgrammePectoral/exercice/{id}";
-	}
+//	@PostMapping("/ProgrammePectoral/exercice/delete/{id}")
+//	public String deleteSerie(@ModelAttribute Serie s) {
+//		this.service.deleteSerie(s);
+//		return "redirect:/ProgrammePectoral/exercice/{id}";
+//	}
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model) {
 	    model.addAttribute("user", new User());
@@ -97,4 +98,78 @@ public class SecurityController {
 	     
 	    return "register_success";
 	}
+	@GetMapping("/about")
+	public String aboutindex() {
+		return "about";
+	}
+	@GetMapping("/delete")
+	public String delete(@RequestParam Long id) {
+		this.service.deleteSerie(id);
+		return "redirect:/";
+	}
+	@GetMapping("/deleteEx")
+	public String deleteEx(@RequestParam Long id) {
+		this.service.deleteExercice(id);
+		return "redirect:/";
+	}
+	@GetMapping("/PectoralsProgramme/{username}")
+	public String Programme(Model model ,Model model2,@PathVariable String username) {
+		model2.addAttribute("username", userRepo.findByUsername(username));
+		model.addAttribute("programme", service.findAllProgrammes());
+		return"allProgrammesPecs";
+	}
+	@GetMapping("/addPectoralsProgramme/{username}")
+	public String addP(Model model ,Model model2, @PathVariable String username) {
+		model2.addAttribute("username", userRepo.findByUsername(username));
+		model.addAttribute("program", new com.zygo.mvc.entities.Programme());
+		return "addProgrammePecs";
+	}
+	@PostMapping("/addPectoralsProgramme/{username}")
+	public String storeP(Model model , @PathVariable String username, com.zygo.mvc.entities.Programme p) {
+		model.addAttribute("username", userRepo.findByUsername(username));
+		service.saveProgramme(p, username);
+		return"redirect:/PectoralsProgramme/{username}";
+	}
+	@GetMapping("/addExoForMyProgramme/{id}")
+	public String addExoOnMyProgramme(Model model,@PathVariable Long id, Model model2) {
+		User user  = this.service.getUserFromTheIdOfProgramme(id);
+		model.addAttribute("exercice", this.service.getAllExoByUsername(user.getUsername()));
+		model2.addAttribute("programme", this.service.findProgrammeById(id));
+		return "addNewExerciceOnMyProg";
+	}
+	@PostMapping("/addExoForMyProgramme/{id}")
+	public String storeExoOnMyProgramme(Model model,@PathVariable Long id, @ModelAttribute Exercice exercice) {
+		this.service.addExForAProg(exercice.getIdE(), id);
+		return "redirect:/PectoralsProgramme/{id}";
+	}
+	@GetMapping("/seemyProgrammes/{id}")
+	public String getAllExoForMyProgramme(Model model, @PathVariable Long id) {
+		model.addAttribute("allExo", this.service.getAllExoOfAProgramme(id));
+		return "seemyProgramme";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

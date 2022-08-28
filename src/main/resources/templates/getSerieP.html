@@ -100,7 +100,7 @@ text-align: center;
                          <th>poids3</th>
                         <th>rep3</th>
                         <th>score</th>
-<!--                         <th>Delete</th> -->
+                        <th>Delete</th>
                       </tr>
                       <tr th:each="s:${allSerie}">
                         <td th:utext="${s.getPoidslv1()}"></td>
@@ -110,12 +110,9 @@ text-align: center;
                          <td th:utext="${s.getPoidslv3()}"></td>
                         <td th:utext="${s.getRep3()}"></td>
                         <td th:utext="${s.fct()}"></td>
-<!--                         <td> -->
-<!--                         <form th:action="@{/ProgrammePectoral/exercice/delete/{id}('id'=${s.getExercie().getIdE()})}" th:object="${s}" method="POST"> -->
-<!--                         <input type="hidden" th:field="${s}">Delete -->
-<!--                           <button type="submit" onClick="return confirm('sure?')"></button> -->
-<!--                         </form> -->
-<!--                         </td> -->
+                        <td>
+                        <a th:href ="@{/delete(id=${s.getIdS()})}">delete</a>
+                        </td>
                        
            </tr>
            

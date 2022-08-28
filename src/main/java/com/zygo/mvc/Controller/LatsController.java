@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zygo.mvc.Repository.UserRepository;
 import com.zygo.mvc.Service.LatsService;
@@ -58,5 +59,15 @@ public class LatsController {
 	public String storee(Model model, @PathVariable Long id, @ModelAttribute LatsSerie s) {
 		this.service.LatsAddSerieForAnExercice(s, id);
 		return "redirect:/ProgrammeLats/exercice/{id}";
+	}
+	@GetMapping("/deleteL")
+	public String delete(@RequestParam Long id) {
+		this.service.deleteSerie(id);
+		return "redirect:/";
+	}
+	@GetMapping("/deleteExL")
+	public String deleteEx(@RequestParam Long id) {
+		this.service.deleteExercice(id);
+		return "redirect:/";
 	}
 }

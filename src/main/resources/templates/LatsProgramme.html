@@ -54,9 +54,7 @@ color: whitesmoke;
             </div>
         </div>
     </nav>
-      <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="../images/head.jpg">
-       
-    </div>
+
     <div class="container">
    <button id="boutton_add">
   <span><a id="name" class="filter__link" th:href="@{'/addEL/'+${#authentication.name}}">Add new exercice</a></span>
@@ -65,10 +63,12 @@ color: whitesmoke;
                       <tr>
                         <th>Exercice</th>
                         <th>Details</th>
+                          <th>Delete</th>
                       </tr>
                       <tr th:each="ex:${exercice}">
                         <td th:utext="${ex.getNameEL()}"></td>
                         <td><a th:href="@{exercice/{idE}('idE'=${ex.getIdEL()})}">View</a></td>
+                        <td> <a th:href ="@{/deleteExL(id=${ex.getIdEL()})}">delete</a></td>
                       </tr>
               
             </table>
@@ -114,4 +114,4 @@ color: whitesmoke;
   
 
 </body>
-</html>s
+</html>

@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.zygo.mvc.Service.MyUserDetailsService;
 
@@ -42,6 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    public MyUserDetailsService userDetailsService() {
 	        return new MyUserDetailsService();
 	    }
+	 @Bean
+	 public HttpSessionEventPublisher httpSessionEventPublisher() {
+	     return new HttpSessionEventPublisher();
+	 }
 	
 	@Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -69,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		     .permitAll()
 		     .defaultSuccessUrl("/index")
 		     .failureUrl("/error");
+	   http.sessionManagement().maximumSessions(1);
 	   
 
 	}

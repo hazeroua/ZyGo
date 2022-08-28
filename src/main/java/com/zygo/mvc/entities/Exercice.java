@@ -3,12 +3,12 @@ package com.zygo.mvc.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 @Entity
@@ -22,6 +22,30 @@ public class Exercice implements Serializable{
 	private String nameE;
 	@ManyToOne
 	private User user;
+//	@OneToMany
+//	private List<Description> Description ;
+	@ManyToMany 
+	private List<Programme> programmes;
+	
+	public List<Programme> getProgrammes() {
+		return programmes;
+	}
+	public void setProgrammeForAnExercice(Programme p) {
+		programmes.add(p);
+	}
+	public void setProgrammes(List<Programme> programmes) {
+		this.programmes = programmes;
+	}
+
+	
+//	public List<Description> getDescription() {
+//		return Description;
+//	}
+//
+//	public void setDescription(List<Description> description) {
+//		Description = description;
+//	}
+
 	public Long getIdE() {
 		return idE;
 	}

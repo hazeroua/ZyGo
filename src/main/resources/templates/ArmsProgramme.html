@@ -65,10 +65,12 @@ color: whitesmoke;
                       <tr>
                         <th>Exercice</th>
                         <th>Details</th>
+                          <th>Delete</th>
                       </tr>
                       <tr th:each="ex:${exercice}">
                         <td th:utext="${ex.getNameEA()}"></td>
                         <td><a th:href="@{exercice/{idE}('idE'=${ex.getIdEA()})}">View</a></td>
+                        <td> <a th:href ="@{/deleteExA(id=${ex.getIdEA()})}">delete</a></td>
                       </tr>
               
             </table>

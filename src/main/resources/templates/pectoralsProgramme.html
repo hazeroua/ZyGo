@@ -54,21 +54,24 @@ color: whitesmoke;
             </div>
         </div>
     </nav>
-      <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="../images/head.jpg">
+      <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" th:data-image-src="@{/images/head.jpg}">
        
     </div>
     <div class="container">
    <button id="boutton_add">
   <span><a id="name" class="filter__link" th:href="@{'/addEP/'+${#authentication.name}}">Add new exercice</a></span>
+  <span><a id="name" class="filter__link" th:href="@{'/PectoralsProgramme/'+${#authentication.name}}">Programmes</a></span>
 </button>
    <table width="100%" height="100%">
                       <tr>
                         <th>Exercice</th>
                         <th>Details</th>
+                        <th>Delete</th>
                       </tr>
                       <tr th:each="ex:${exercice}">
                         <td th:utext="${ex.getNameE()}"></td>
                         <td><a th:href="@{exercice/{idE}('idE'=${ex.getIdE()})}">View</a></td>
+                        <td> <a th:href ="@{/deleteEx(id=${ex.getIdE()})}">delete</a></td>
                       </tr>
               
             </table>

@@ -10,6 +10,8 @@ import com.zygo.mvc.Repository.LegsSerieRepository;
 import com.zygo.mvc.Repository.UserRepository;
 import com.zygo.mvc.entities.LegsExercice;
 import com.zygo.mvc.entities.LegsSerie;
+import com.zygo.mvc.entities.LegsExercice;
+import com.zygo.mvc.entities.User;
 
 @Service
 public class LegsService {
@@ -51,7 +53,20 @@ public class LegsService {
 		 s.setExercieLe(repository.findByIdELe(id));
 		 Srepository.save(s);
 	}
-	public void deleteSerie(LegsSerie s) {
-		Srepository.delete(s);
+	public LegsSerie deleteSerie(Long id) {
+		LegsSerie s = Srepository.findByIdSLe(id);
+		LegsExercice e = s.getExercieLe();
+		 e.getSeriesLe().remove(s);
+		 Srepository.delete(s);
+		 
+		 return s;
+	}
+	public LegsExercice deleteExercice(Long id) {
+		LegsExercice e = repository.findByIdELe(id);
+		User u = e.getUser();
+		u.getExercicesLe().remove(e);
+		repository.delete(e);
+
+		return e;
 	}
 }
