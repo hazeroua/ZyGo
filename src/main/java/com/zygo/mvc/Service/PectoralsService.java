@@ -80,10 +80,10 @@ public class PectoralsService {
 		Prepository.save(p);
 	}
 	public void addExForAProg(Long idE, Long idP) {
-		Exercice e = repository.findByIdE(idE);
+		Exercice ep = repository.findByIdE(idE);
 		Programme p = Prepository.findByIdPr(idP);
-		p.setAnExerciceForAProgramme(e);
-		e.setProgrammeForAnExercice(p);
+		p.setAnExerciceForAProgramme(ep);
+		ep.setProgrammes(p);
 	}
 
 	public List<Exercice> getAllExoOfAProgramme(Long id){

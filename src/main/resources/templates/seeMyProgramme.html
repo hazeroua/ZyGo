@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+		<table width="100%" height="100%">
+		<tr>
+			<th>Nom exercice</th>
+			<th>Description</th>
+			<th>Progression</th>
+		</tr>
+		<tr th:each="exo:${allExo}">
+			<td th:utext="${exo.getNameE()}"></td>
+<!-- 			<td th:utext="${exo.getDescription()}"></td> -->
+			<td ><a th:href="@{/ProgrammePectoral/exercice/{id}('id'=${exo.getIdE()})}">View</a></td>
+			
+			
+			
+		</tr>
+	</table>
+</body>
+</html>

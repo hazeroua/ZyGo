@@ -24,18 +24,19 @@ public class Exercice implements Serializable{
 	private User user;
 //	@OneToMany
 //	private List<Description> Description ;
-	@ManyToMany 
-	private List<Programme> programmes;
-	
-	public List<Programme> getProgrammes() {
-		return programmes;
-	}
-	public void setProgrammeForAnExercice(Programme p) {
-		programmes.add(p);
-	}
-	public void setProgrammes(List<Programme> programmes) {
-		this.programmes = programmes;
-	}
+	@ManyToOne
+	private Programme programmes;
+
+
+//	public List<Programme> getProgrammes() {
+//		return programmes;
+//	}
+//	public void setProgrammeForAnExercice(Programme p) {
+//		programmes.add(p);
+//	}
+//	public void setProgrammes(List<Programme> programmes) {
+//		this.programmes = programmes;
+//	}
 
 	
 //	public List<Description> getDescription() {
@@ -50,6 +51,14 @@ public class Exercice implements Serializable{
 		return idE;
 	}
 	
+	public Programme getProgrammes() {
+		return programmes;
+	}
+
+	public void setProgrammes(Programme programmes) {
+		this.programmes = programmes;
+	}
+
 	public String getNameE() {
 		return nameE;
 	}

@@ -131,14 +131,16 @@ public class SecurityController {
 		return"redirect:/PectoralsProgramme/{username}";
 	}
 	@GetMapping("/addExoForMyProgramme/{id}")
-	public String addExoOnMyProgramme(Model model,@PathVariable Long id, Model model2) {
+	public String addExoOnMyProgramme(Model model,@PathVariable Long id, Model model2, Model model3) {
 		User user  = this.service.getUserFromTheIdOfProgramme(id);
 		model.addAttribute("exercice", this.service.getAllExoByUsername(user.getUsername()));
 		model2.addAttribute("programme", this.service.findProgrammeById(id));
+		model3.addAttribute("nvexo",new Exercice());
 		return "addNewExerciceOnMyProg";
 	}
 	@PostMapping("/addExoForMyProgramme/{id}")
 	public String storeExoOnMyProgramme(Model model,@PathVariable Long id, @ModelAttribute Exercice exercice) {
+		System.out.println(exercice.getIdE());
 		this.service.addExForAProg(exercice.getIdE(), id);
 		return "redirect:/PectoralsProgramme/{id}";
 	}

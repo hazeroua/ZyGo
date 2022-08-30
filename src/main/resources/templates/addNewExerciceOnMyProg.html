@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form method="POST" th:action="@{/addExoForMyProgramme/{id}('id'=${programme.getIdPr()})}" th:object="${nvexo}">
+<select  th:field="${nvexo.programmes}" >
+	<option th:each = "exercice : ${exercice}" th:value = "exercice" th:text = "${exercice.getNameE()}"></option>
+</select>
+<button type="submit" class="btn btn-info">Submit</button>	
+</form>
+</body>
+</html>

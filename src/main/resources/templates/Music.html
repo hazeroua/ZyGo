@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ZyGo</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/fontawesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/templatemo-style.css}">
+
+<style>
+table, th, td {
+
+border: 1px solid black;
+
+border-collapse: collapse;
+
+}
+
+th, td {
+
+padding: 10px;
+
+}
+
+th {
+
+background-color: black;
+color: whitesmoke;
+
+}
+</style>
+</head>
+<body>
+<table>
+	<tr>
+		<th>Username</th>
+		<th>Music name</th>
+		<th>Mp3</th>
+	</tr>
+	<tr th:each ="ms:${musics}">
+	<td th:utext ="${ms.getUser()}"></td>
+	<td th:utext="${ms.getMusicName()}"></td>
+	<td>
+	<iframe width="560" height="315" th:src="@{https://www.youtube.com/embed/{url}(url=${ms.getURL()})}"  frameborder="0" alt="no video attached" allowfullscreen="1"></iframe>
+	</td>
+	</tr>
+</table>
+</body>
+</html>

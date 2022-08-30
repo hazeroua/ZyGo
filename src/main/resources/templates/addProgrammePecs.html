@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form method="POST" th:action="@{/addPectoralsProgramme/{username}('username'=${username.getUsername()}) }" th:object="${program}">
+	<label for="nom">Nom du programme</label>
+	<input type="text" placeholder="Nom" th:field=*{nomPr}/>
+	<label for="nom">Description</label>
+	<input type="text" placeholder="Nom" th:field=*{Description}/>
+	<button type="submit" class="btn btn-info">Submit</button>	
+</form>
+</body>
+</html>

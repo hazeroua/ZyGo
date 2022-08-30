@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <span><a id="name" class="filter__link" th:href="@{'/addPectoralsProgramme/'+${#authentication.name}}">Add new Programmes</a></span>
+	<table width="100%" height="100%">
+		<tr>
+			<th>User</th>
+			<th>Nom du programme</th>
+			<th>Description</th>
+			<th>add exercice on my programme</th>
+			<th>see my programme</th>
+		</tr>
+		<tr th:each="pr:${programme}">
+			<td th:utext="${pr.getUser().getUsername()}"></td>
+			<td th:utext="${pr.getNomPr()}"></td>
+			<td th:utext="${pr.getDescription()}"></td>
+			<td ><a th:href="@{/addExoForMyProgramme/{id}('id'=${pr.getIdPr()})}">add</a></td>
+			<td ><a th:href="@{/seemyProgrammes/{id}('id'=${pr.getIdPr()})}">View </a></td>
+			
+			
+			
+		</tr>
+	</table>
+</body>
+</html>
